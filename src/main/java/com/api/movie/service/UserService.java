@@ -16,4 +16,6 @@ public interface UserService extends UserDetailsService {
     public void deleteUserById(UUID id);
     public User getUserByUsername(String username);
     public User getUserByEmail(String email);
+    public boolean isValidEmail(String email);
+    public boolean isValidPassword(String passwordLogin, String passwordDocument);
 }

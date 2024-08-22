@@ -33,7 +33,7 @@ public class UserServiceImplement implements UserService {
     @Override
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User does not found by email" + email));
+                .orElseThrow(() -> new RuntimeException("User does not found by email " + email));
     }
 
     @Override
@@ -60,6 +60,17 @@ public class UserServiceImplement implements UserService {
             return userRepository.save(user);
 
         }).orElseThrow(() -> new RuntimeException("User does not found by id " + id.toString()));
+    }
+
+    @Override
+    public boolean isValidPassword(String passwordLogin, String passwordDocument) {
+        return passwordEncoder.matches(passwordLogin, passwordDocument);
+    }
+    
+
+    @Override
+    public boolean isValidEmail(String email) {
+        return userRepository.findByEmail(email).isPresent();
     }
 
     @Override

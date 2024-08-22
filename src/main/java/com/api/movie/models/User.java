@@ -41,12 +41,12 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role;
+    private Role role = Role.USER;
 
     @Column(nullable = false, unique = true)
     private String email;
 
-    private boolean enabled;
+    private boolean enabled = true;
 
     @CreationTimestamp
     @Column(updatable = false, name = "created_at")
