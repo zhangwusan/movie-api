@@ -4,14 +4,14 @@ import org.springframework.stereotype.Service;
 
 import com.api.movie.dtos.request.UserLoginRequest;
 import com.api.movie.dtos.request.UserRegisterRequest;
-import com.api.movie.models.User;
-
+import com.api.movie.dtos.response.UserLoginResponse;
+import com.api.movie.dtos.response.UserRegisterResponse;
 
 @Service
 public interface AuthService {
-    public User register(UserRegisterRequest userRegisterRequest);
+    public UserRegisterResponse register(UserRegisterRequest userRegisterRequest);
 
-    public User login(UserLoginRequest userLoginRequest);
+    public UserLoginResponse login(UserLoginRequest userLoginRequest);
 
     public String logout();
 }
