@@ -1,6 +1,7 @@
 package com.api.movie.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,7 @@ public class ContentController {
 
     @Autowired
     private UserService userService;
+
     @GetMapping("/")
     public String indexPage() {
         return "hello to index page";
@@ -26,5 +28,11 @@ public class ContentController {
         User user = userService.getUserByEmail(userLoginRequest.getEmail());
         userLoginRequest.setUsername(user.getUsername());
         return userService.verify(UserMapper.mapUserLoginRequestToUser(userLoginRequest));
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/quote")
+    public String quotePage() {
+        return "hello to quote page";
     }
 }

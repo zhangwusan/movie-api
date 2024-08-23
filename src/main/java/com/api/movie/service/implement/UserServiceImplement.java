@@ -7,15 +7,16 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.api.movie.models.User;
 import com.api.movie.repositories.UserRepository;
+import com.api.movie.service.JwtService;
 import com.api.movie.service.UserService;
 
 import lombok.AllArgsConstructor;
 
-@Component
+@Service
 @AllArgsConstructor
 public class UserServiceImplement implements UserService {
 
@@ -25,6 +26,10 @@ public class UserServiceImplement implements UserService {
     private final PasswordEncoder passwordEncoder;
     @Autowired
     private final AuthenticationManager authenticationManager;
+    @Autowired
+    private final JwtService jwtService;
+
+
 
 
     @Override
@@ -85,7 +90,7 @@ public class UserServiceImplement implements UserService {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
         if (authentication.isAuthenticated()) {
-            return "success";
+            return jwtService.generateToken(user.getUsername());
         }
         return "failure";
     }
