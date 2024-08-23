@@ -1,5 +1,6 @@
 package com.api.movie.dtos.mapping;
 
+import com.api.movie.dtos.request.UserLoginRequest;
 import com.api.movie.dtos.request.UserRegisterRequest;
 import com.api.movie.dtos.response.UserLoginResponse;
 import com.api.movie.dtos.response.UserRegisterResponse;
@@ -30,5 +31,13 @@ public class UserMapper {
                 user.getUsername(),
                 user.getEmail(),
                 user.getRole().name());
+    }
+
+    public static User mapUserLoginRequestToUser(UserLoginRequest userLoginRequest) {
+        User user = new User();
+        user.setUsername(userLoginRequest.getUsername());
+        user.setEmail(userLoginRequest.getEmail());
+        user.setPassword(userLoginRequest.getPassword());
+        return user;
     }
 }

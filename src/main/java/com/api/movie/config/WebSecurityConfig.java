@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import com.api.movie.models.Role;
-import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
@@ -23,7 +22,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/admin/**", "/api/v1/**").hasRole(Role.ADMIN.name())
                         .requestMatchers("/auth/**", "login").permitAll()
                         .anyRequest().authenticated())
-                .httpBasic(withDefaults())
+                .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }
