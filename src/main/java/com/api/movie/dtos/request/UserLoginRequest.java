@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class UserLoginRequest {
+    private String username;
     @NotBlank(message = "email is required")
     @Email(message = "Email should be valid")
     private String email;

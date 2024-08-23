@@ -2,13 +2,16 @@ package com.api.movie.service.implement;
 
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.api.movie.models.User;
+import com.api.movie.models.UserPrincipal;
 import com.api.movie.repositories.UserRepository;
 import com.api.movie.service.UserService;
 
@@ -18,10 +21,13 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class UserServiceImplement implements UserService {
 
-    
+    @Autowired
     private final UserRepository userRepository;
+    @Autowired
     private final PasswordEncoder passwordEncoder;
+    @Autowired
     private final AuthenticationManager authenticationManager;
+
 
     @Override
     public User createUser(User user) {
@@ -70,7 +76,6 @@ public class UserServiceImplement implements UserService {
     public boolean isValidPassword(String passwordLogin, String passwordDocument) {
         return passwordEncoder.matches(passwordLogin, passwordDocument);
     }
-    
 
     @Override
     public boolean isValidEmail(String email) {
@@ -79,7 +84,8 @@ public class UserServiceImplement implements UserService {
 
     @Override
     public String verify(User user) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getPassword(), user.getUsername()));
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
         if (authentication.isAuthenticated()) {
             return "success";
         }
