@@ -6,6 +6,12 @@ import java.util.Collections;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import lombok.ToString;
+
+
+
+@ToString
 public class UserPrincipal implements UserDetails {
 
     private User user;
@@ -47,15 +53,5 @@ public class UserPrincipal implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "UserPrincipal {" +
-                "user id=" + user.getId() +
-                ", username='" + user.getUsername() + '\'' +
-                ", email='" + user.getEmail() + '\'' +
-                ", roles=" + user.getRole() +
-                '}';
     }
 }
