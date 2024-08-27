@@ -16,6 +16,8 @@ import com.api.movie.exception.MovieAlreadyException;
 import com.api.movie.exception.MovieNotFoundException;
 import com.api.movie.exception.SubscriptionAlreadyException;
 import com.api.movie.exception.SubscriptionNotFoundException;
+import com.api.movie.exception.TransactionAlreadyException;
+import com.api.movie.exception.TransactionNotFoundException;
 import com.api.movie.exception.UserAlreadyExistsException;
 import com.api.movie.exception.UserNotFoundException;
 
@@ -83,6 +85,18 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MovieNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleMovieNotFoundException(MovieNotFoundException exception) {
+        ErrorResponse error = new ErrorResponse(HttpStatus.NOT_FOUND, exception.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(TransactionAlreadyException.class)
+    public ResponseEntity<ErrorResponse> handleTransactionAlreadyException(TransactionAlreadyException exception) {
+        ErrorResponse error = new ErrorResponse(HttpStatus.CONFLICT, exception.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(TransactionNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleTransactionNotFoundException(TransactionNotFoundException exception) {
         ErrorResponse error = new ErrorResponse(HttpStatus.NOT_FOUND, exception.getMessage());
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }

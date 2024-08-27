@@ -60,5 +60,5 @@ public class User {
     private Date updatedAt;
 
     @OneToMany(mappedBy = "user")
-    private Set<Subscription> subscriptions;
+    private Set<Transaction> transactions;
 }
