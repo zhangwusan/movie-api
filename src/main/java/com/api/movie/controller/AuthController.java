@@ -1,6 +1,7 @@
 package com.api.movie.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +22,8 @@ public class AuthController {
     // Controller for user authentication and authorization
     // Implement methods for login, logout, etc.
     @PostMapping("/login")
-    public UserLoginResponse login(@RequestBody UserLoginRequest userLoginRequest) {
-        return authService.login(userLoginRequest);
+    public ResponseEntity<UserLoginResponse> login(@RequestBody UserLoginRequest userLoginRequest) {
+        return ResponseEntity.ok(authService.login(userLoginRequest));
     }
 
     @PostMapping("/logout")
