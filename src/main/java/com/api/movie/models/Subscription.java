@@ -53,6 +53,6 @@ public class Subscription {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "subscription")
-    private Set<Transaction> subscriptions;
+    private Set<Transaction> transactions;
 
 }
