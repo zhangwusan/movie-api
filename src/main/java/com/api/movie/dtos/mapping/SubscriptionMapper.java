@@ -34,6 +34,7 @@ public class SubscriptionMapper {
                 BigDecimal.valueOf(request.discount()),
                 featuresJson,
                 null,
+                null,
                 null
         );
     }
