@@ -55,7 +55,6 @@ public class User {
     @Column(updatable = false, name = "created_at")
     private Date createdAt;
 
-    @CreationTimestamp
     @UpdateTimestamp
     @Column(name = "updated_at")
     private Date updatedAt;
