@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import com.api.movie.dtos.mapping.GenreMapper;
 import com.api.movie.dtos.request.GenreRequest;
 import com.api.movie.dtos.response.GenreResponse;
-import com.api.movie.models.Genres;
+import com.api.movie.models.Genre;
 import com.api.movie.service.GenresService;
 import com.api.movie.utils.ApiResponse;
 
@@ -36,7 +36,7 @@ public class GenresController {
     @PostMapping
     public ResponseEntity<ApiResponse<GenreResponse>> createGenre(@RequestBody GenreRequest genre) {
         try {
-            Genres createdGenre = genresService.createGenres(GenreMapper.toGenre(genre));
+            Genre createdGenre = genresService.createGenres(GenreMapper.toGenre(genre));
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(new ApiResponse<>(GenreMapper.toGenreResponse(createdGenre), "Genre created successfully",
                             HttpStatus.CREATED));
@@ -49,7 +49,7 @@ public class GenresController {
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<GenreResponse>> getGenreById(@PathVariable Long id) {
         try {
-            Genres genre = genresService.getGenresById(id);
+            Genre genre = genresService.getGenresById(id);
             if (genre != null) {
                 return ResponseEntity.ok(new ApiResponse<>(GenreMapper.toGenreResponse(genre),
                         "Genre fetched successfully", HttpStatus.OK));
@@ -82,7 +82,7 @@ public class GenresController {
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<GenreResponse>> updateGenre(@PathVariable Long id, @RequestBody GenreRequest genreRequest) {
         try {
-            Genres updatedGenre = genresService.updateGenresById(id, GenreMapper.toGenre(genreRequest));
+            Genre updatedGenre = genresService.updateGenresById(id, GenreMapper.toGenre(genreRequest));
             if (updatedGenre != null) {
                 return ResponseEntity.ok(new ApiResponse<>(GenreMapper.toGenreResponse(updatedGenre),
                         "Genre updated successfully", HttpStatus.OK));

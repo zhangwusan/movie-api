@@ -17,14 +17,14 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(name = "genres")
-public class Genres {
+public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(unique = true, nullable = false)
     private String name;
     
-    public Genres(String name2) {
+    public Genre(String name2) {
         this.name = name2;    
     }
 }
