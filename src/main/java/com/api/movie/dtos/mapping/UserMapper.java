@@ -52,18 +52,19 @@ public class UserMapper {
                 request.email(),
                 request.enabled(),
                 null,
+                null,
                 null);
     }
 
     public static UserResponse toUserResponse(User user) {
         return new UserResponse(
-            user.getId(), 
-            user.getUsername(), 
-            user.getPassword(), 
-            user.getEmail(), 
-            user.getRole(), 
-            user.isEnabled(),
-            user.getCreatedAt(), 
-            user.getUpdatedAt());
+                user.getId(),
+                user.getUsername(),
+                user.getPassword(),
+                user.getEmail(),
+                user.getRole(),
+                user.isEnabled(),
+                user.getCreatedAt(),
+                user.getUpdatedAt());
     }
 }
