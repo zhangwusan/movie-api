@@ -16,8 +16,11 @@ public class ApiResponse<T> {
     private String message;
     private HttpStatus status;
 
-    public void setAll(T data, String message, HttpStatus status) {
+    public ApiResponse(T data) {
         this.data = data;
+    }
+
+    public ApiResponse(String message, HttpStatus status) {
         this.message = message;
         this.status = status;
     }
