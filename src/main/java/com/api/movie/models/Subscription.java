@@ -47,7 +47,6 @@ public class Subscription {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    @CreationTimestamp
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
