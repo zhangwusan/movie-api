@@ -1,5 +1,7 @@
 package com.api.movie.service.implement;
 
+import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,11 @@ public class UserServiceImplement implements UserService {
     }
 
     @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    @Override
     public void deleteUserById(UUID id) {
         userRepository.deleteById(id);
     }
@@ -71,6 +78,7 @@ public class UserServiceImplement implements UserService {
             user.setUsername(userUpdate.getUsername());
             user.setEmail(userUpdate.getEmail());
             user.setEnabled(userUpdate.isEnabled());
+            user.setUpdatedAt(new Date());
             if (!user.getPassword().equals(userUpdate.getPassword())) {
                 user.setPassword(passwordEncoder.encode(userUpdate.getPassword()));
             }

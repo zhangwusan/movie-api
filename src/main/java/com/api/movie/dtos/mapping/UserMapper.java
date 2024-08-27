@@ -2,8 +2,10 @@ package com.api.movie.dtos.mapping;
 
 import com.api.movie.dtos.request.UserLoginRequest;
 import com.api.movie.dtos.request.UserRegisterRequest;
+import com.api.movie.dtos.request.UserRequest;
 import com.api.movie.dtos.response.UserLoginResponse;
 import com.api.movie.dtos.response.UserRegisterResponse;
+import com.api.movie.dtos.response.UserResponse;
 import com.api.movie.models.Role;
 import com.api.movie.models.User;
 
@@ -39,5 +41,29 @@ public class UserMapper {
         user.setEmail(userLoginRequest.getEmail());
         user.setPassword(userLoginRequest.getPassword());
         return user;
+    }
+
+    public static User toUser(UserRequest request) {
+        return new User(
+                null,
+                request.username(),
+                request.password(),
+                request.role() == null ? Role.USER : request.role(),
+                request.email(),
+                request.enabled(),
+                null,
+                null);
+    }
+
+    public static UserResponse toUserResponse(User user) {
+        return new UserResponse(
+            user.getId(), 
+            user.getUsername(), 
+            user.getPassword(), 
+            user.getEmail(), 
+            user.getRole(), 
+            user.isEnabled(),
+            user.getCreatedAt(), 
+            user.getUpdatedAt());
     }
 }

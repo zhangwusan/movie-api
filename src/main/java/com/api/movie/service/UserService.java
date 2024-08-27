@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.api.movie.models.User;
 
+import java.util.List;
+
 @Service
 public interface UserService {
     // Define methods for user CRUD operations
@@ -26,4 +28,6 @@ public interface UserService {
     public boolean isValidPassword(String passwordLogin, String passwordDocument);
 
     public String verify(User user);
+
+    public List<User> getAllUsers();
 }
