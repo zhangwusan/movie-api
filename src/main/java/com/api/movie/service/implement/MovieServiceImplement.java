@@ -21,7 +21,6 @@ public class MovieServiceImplement implements MovieService {
     @Override
     public Movie createMovie(Movie movie) {
         if (repository.findByTitle(movie.getTitle()).isPresent()) {
-            System.out.println("Movie " + movie.getTitle());
             throw new MovieAlreadyException("Movie with the same title already exists");
         }
         return repository.save(movie);
