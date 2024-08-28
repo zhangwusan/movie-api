@@ -42,6 +42,7 @@ public class MovieMapper {
                 request.trailerUrl(),
                 null,
                 null,
+                null,
                 null);
     }
 
@@ -71,7 +72,8 @@ public class MovieMapper {
                 request.trailerUrl(),
                 null,
                 null,
-                genres);
+                genres,
+                null);
     }
 
     public static MovieReponse toMovieReponse(Movie movie) {

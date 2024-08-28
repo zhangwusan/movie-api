@@ -53,6 +53,7 @@ public class UserMapper {
                 request.enabled(),
                 null,
                 null,
+                null,
                 null);
     }
 
