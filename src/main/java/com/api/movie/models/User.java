@@ -5,6 +5,8 @@ import java.util.UUID;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -59,6 +61,7 @@ public class User {
     @Column(name = "updated_at")
     private Date updatedAt;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "user")
     private Set<Transaction> transactions;
 }

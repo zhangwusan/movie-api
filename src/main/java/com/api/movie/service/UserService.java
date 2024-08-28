@@ -10,6 +10,7 @@ import java.util.List;
 
 @Service
 public interface UserService {
+
     // Define methods for user CRUD operations
     public User createUser(User user);
 
@@ -30,4 +31,5 @@ public interface UserService {
     public String verify(User user);
 
     public List<User> getAllUsers();
+
 }
