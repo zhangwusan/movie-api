@@ -1,6 +1,7 @@
 package com.api.movie.controller.v1;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,12 +18,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.api.movie.dtos.mapping.MovieMapper;
 import com.api.movie.dtos.request.MovieRequest;
 import com.api.movie.dtos.response.MovieReponse;
+import com.api.movie.exception.GenreNotFoundException;
 import com.api.movie.exception.MovieAlreadyException;
+import com.api.movie.models.Genre;
 import com.api.movie.models.Movie;
+import com.api.movie.service.GenresService;
 import com.api.movie.service.MovieService;
 import com.api.movie.utils.ApiResponse;
 
 import jakarta.validation.Valid;
+
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/movies")
@@ -30,6 +36,8 @@ public class MovieController {
 
     @Autowired
     private MovieService service;
+    @Autowired
+    private GenresService genreService;
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<MovieReponse>>> getAllMovies() {
@@ -45,12 +53,21 @@ public class MovieController {
     @PostMapping
     public ResponseEntity<ApiResponse<Movie>> addMovie(@Valid @RequestBody MovieRequest request) {
         try {
-            Movie movie = MovieMapper.toMovie(request);
+            Set<Genre> genres = request.genreIds().stream()
+                    .map(id -> genreService.getGenresById(id))
+                    .collect(Collectors.toSet());
+
+            Movie movie = MovieMapper.toMovie(request, genres);
             Movie newMovie = service.createMovie(movie);
-            return ResponseEntity.ok(new ApiResponse<>(newMovie, "Created successfully", HttpStatus.CREATED));
+
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(new ApiResponse<>(newMovie, "Created successfully", HttpStatus.CREATED));
         } catch (MovieAlreadyException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body(new ApiResponse<>(e.getMessage(), HttpStatus.CONFLICT));
+        } catch (GenreNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ApiResponse<>(e.getMessage(), HttpStatus.BAD_REQUEST));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ApiResponse<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR));
@@ -73,7 +90,10 @@ public class MovieController {
     public ResponseEntity<ApiResponse<MovieReponse>> updateMovie(@Valid @PathVariable Long id,
             @Valid @RequestBody MovieRequest request) {
         try {
-            Movie movie = MovieMapper.toMovie(request);
+            Set<Genre> genres = request.genreIds().stream()
+                    .map(ids -> genreService.getGenresById(ids))
+                    .collect(Collectors.toSet());
+            Movie movie = MovieMapper.toMovie(request, genres);
             Movie updatedMovie = service.updateMovieById(id, movie);
             return ResponseEntity.ok(
                     new ApiResponse<>(MovieMapper.toMovieReponse(updatedMovie), "Updated successfully", HttpStatus.OK));

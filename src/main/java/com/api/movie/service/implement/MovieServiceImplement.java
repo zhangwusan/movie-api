@@ -11,7 +11,6 @@ import com.api.movie.models.Movie;
 import com.api.movie.repositories.MovieRepository;
 import com.api.movie.service.MovieService;
 
-
 @Service
 public class MovieServiceImplement implements MovieService {
 
@@ -46,6 +45,7 @@ public class MovieServiceImplement implements MovieService {
         existingMovie.setCountry(movie.getCountry());
         existingMovie.setPosterUrl(movie.getPosterUrl());
         existingMovie.setTrailerUrl(movie.getTrailerUrl());
+        existingMovie.setGenres(movie.getGenres());
         return repository.save(existingMovie);
     }
 
