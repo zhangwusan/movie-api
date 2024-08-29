@@ -44,6 +44,7 @@ public class MovieMapper {
                 null,
                 null,
                 null,
+                null,
                 null);
     }
 
@@ -74,6 +75,7 @@ public class MovieMapper {
                 null,
                 null,
                 genres,
+                null,
                 null,
                 null);
     }

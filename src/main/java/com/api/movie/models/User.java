@@ -68,4 +68,8 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<WatchHistory> watchHistories;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<RatingsReviews> ratingsReviews;
+
 }

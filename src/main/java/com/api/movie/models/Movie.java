@@ -87,4 +87,7 @@ public class Movie {
     @OneToOne(mappedBy = "movie", cascade = CascadeType.ALL)
     private MoviePerformance performance;
 
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    private Set<RatingsReviews> ratingsReviews;
+
 }
