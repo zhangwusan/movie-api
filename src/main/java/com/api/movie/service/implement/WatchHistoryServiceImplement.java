@@ -3,11 +3,13 @@ package com.api.movie.service.implement;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.api.movie.models.WatchHistory;
 import com.api.movie.repositories.WatchHistoryRepository;
 import com.api.movie.service.WatchHistoryService;
 
+@Service
 public class WatchHistoryServiceImplement implements WatchHistoryService {
 
     @Autowired
