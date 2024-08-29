@@ -90,4 +90,10 @@ public class Movie {
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private Set<RatingsReviews> ratingsReviews;
 
+    @OneToMany(mappedBy = "recommendedMovie", cascade = CascadeType.ALL)
+    private Set<Recommendation> recommendedMovies;
+
+    @OneToMany(mappedBy = "basedOnMovie", cascade = CascadeType.ALL)
+    private Set<Recommendation> basedOnMovies;
+
 }

@@ -3,6 +3,7 @@ package com.api.movie.service.implement;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.api.movie.dtos.mapping.RatingsReviewsMapper;
 import com.api.movie.dtos.request.RatingsReviewsRequest;
@@ -15,6 +16,7 @@ import com.api.movie.service.MovieService;
 import com.api.movie.service.RatingsReviewsService;
 import com.api.movie.service.UserService;
 
+@Service
 public class RatingsReviewsServiceImplement implements RatingsReviewsService {
 
     @Autowired

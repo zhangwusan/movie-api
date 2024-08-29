@@ -2,9 +2,12 @@ package com.api.movie.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.api.movie.dtos.request.RatingsReviewsRequest;
 import com.api.movie.dtos.response.RatingsReviewsResponse;
 
+@Service
 public interface RatingsReviewsService {
     public List<RatingsReviewsResponse> getAllRatingsReviews();
 

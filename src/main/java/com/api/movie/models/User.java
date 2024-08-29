@@ -72,4 +72,6 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<RatingsReviews> ratingsReviews;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Recommendation> recommendations;
 }
